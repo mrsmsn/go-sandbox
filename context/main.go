@@ -9,19 +9,19 @@ import (
 func infiniteLoop(ctx context.Context) {
 	// 終わらないやつ
 	for {
+		time.Sleep(100 * time.Millisecond)
 		fmt.Println("Help!")
 	}
 }
 
 func main() {
 	ctx := context.Background()
-	ctx, cancel := context.WithCancel(ctx)
-
-	go infiniteLoop(ctx)
 
 	// 2秒待ってキャンセルする
-	time.Sleep(2 * time.Second)
-	cancel()
+	ctx, cancel := context.WithTimeout(ctx, 2*time.Second)
+	defer cancel()
+
+	go infiniteLoop(ctx)
 
 	select {
 	case <-ctx.Done():
