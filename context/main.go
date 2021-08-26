@@ -3,28 +3,11 @@ package main
 import (
 	"context"
 	"fmt"
-	"time"
 )
-
-func infiniteLoop(ctx context.Context) {
-	// 終わらないやつ
-	for {
-		time.Sleep(100 * time.Millisecond)
-		fmt.Println("Help!")
-	}
-}
 
 func main() {
 	ctx := context.Background()
+	ctx = context.WithValue(ctx, "hoge", "value test")
 
-	// 2秒待ってキャンセルする
-	ctx, cancel := context.WithTimeout(ctx, 2*time.Second)
-	defer cancel()
-
-	go infiniteLoop(ctx)
-
-	select {
-	case <-ctx.Done():
-		fmt.Println(ctx.Err())
-	}
+	fmt.Println(ctx.Value("hoge").(string))
 }
