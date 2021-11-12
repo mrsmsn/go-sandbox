@@ -1,0 +1,5 @@
+cars:
+  - name: Alex
+    jname: アレックス
+    category: 自動車
+    color: 赤

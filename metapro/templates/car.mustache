@@ -1,0 +1,37 @@
+package car
+
+import "fmt"
+
+type {{Name}} struct {
+    Name     string
+    Category string
+    Color    string
+}
+
+func New{{Name}}() {{Name}} {
+    return {{Name}}{
+        Name:     "{{JName}}",
+        Category: "{{Category}}",
+        Color:    "{{Color}}",
+    }
+}
+
+func (c {{Name}}) Display() string {
+    return fmt.Sprintf(`%s【%s|%s|%s向け】`,
+        g.Name,
+        g.Category,
+        g.Color,
+    )
+}
+
+func (g {{Name}}) GetName() string {
+    return g.Name
+}
+
+func (g {{Name}}) GetCategory() string {
+    return g.Category
+}
+
+func (g {{Name}}) GetColor() string {
+    return g.Color
+}
